@@ -1,6 +1,6 @@
 import os
 import sys
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 
 # https://java2blog.com/python-count-files-directory/
 
@@ -12,9 +12,15 @@ import matplotlib.pyplot as plt
 #-  seperate function to pie
 # - show
 
-def pie(size, label):
-	fig, ax = plt.subplots()
-	ax.pie(size, labels=label, autopct='%1.1f%%')
+def render(size, label):
+	fig, (ax1, ax2) = plt.subplots(1, 2)
+	fig.suptitle("Number of images per directory")
+
+	ax1.pie(size, labels=label, autopct='%1.1f%%')
+
+	ax2.bar(label, size)
+
+	plt.show()
 
 
 def main(path):
@@ -27,16 +33,10 @@ def main(path):
 			dir_path = os.path.join(root, dir)
 			count_file.append(len(os.listdir(dir_path)))
 
-	# print(count_file)
-	# print(dir_label)
-	pie(count_file, dir_label)
-	plt.bar(dir_label, count_file)
-	plt.show()
-
+	render(count_file, dir_label)
 
 
 if __name__ == "__main__":
 	if len(sys.argv) != 2:
 		exit("Usage: ./Distribution.py directory")
 	main(sys.argv[1])
-
