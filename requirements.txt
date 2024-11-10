@@ -2,3 +2,4 @@ opencv-python
 plantcv
 pillow
 matplotlib
+seaborn
