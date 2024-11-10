@@ -28,14 +28,12 @@ def render(fruit_type, label, size):
 
 	plt.show()
 
-def get_label():
-	return
 
 def main(path):
 	fruit_dictionary = {}
 
 	for root, dirs, files in os.walk(path):
-		for dir in dirs:
+		for dir in sorted(dirs):
 			if "_" in dir:
 				dir_path = os.path.join(root, dir)
 				files_in_dir = [item for item in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, item))]
@@ -49,7 +47,6 @@ def main(path):
 
 	for fruit in sorted(fruit_dictionary):
 		render(fruit, fruit_dictionary[fruit]["label"], fruit_dictionary[fruit]["size"])
-
 
 if __name__ == "__main__":
 	if len(sys.argv) != 2:
